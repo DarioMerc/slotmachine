@@ -124,24 +124,24 @@ export const Slots = () => {
 
 const Container = styled.div`
     width: 20%;
-    height: 40%;
+    height: 50%;
     background-color: red;
     
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+        position: absolute;
+        top:0;
+        bottom: 0;
+        left: 0;
+        right: 0;
     
     margin: auto;
 `
 const SlotContainer = styled(Panel)`
     min-width: 400px;
-  min-height: 400px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    min-height: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 const FruitContainers = styled.div`
   display: flex;
