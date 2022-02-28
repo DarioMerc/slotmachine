@@ -1,8 +1,7 @@
 import React,{useRef, useState} from 'react';
 import styled, {ThemeProvider } from 'styled-components';
-import GlobalStyles from "./GlobalStyle";
 
-import { Panel,TextField,Button } from 'react95';
+import { Panel,Button } from 'react95';
 import original from "react95/dist/themes/original";
 
 const fruits = ["🍒", "🍉", "🍊", "🍓", "🍇", "🥝"]
@@ -21,10 +20,10 @@ export const Slots = () => {
         let slot1,slot2,slot3 = null;
         slotRef.forEach((slot, i) => {
             const selected = triggerSlotRotation(slot.current);
-            if(i+1 == 1){
+            if(i+1 === 1){
                 slot1 = selected;
             }
-            else if(i+1 == 2){
+            else if(i+1 === 2){
                 slot2 = selected;
             }
             else{
