@@ -122,9 +122,8 @@ export const Slots = () => {
 }
 
 const Container = styled.div`
-    width: 20%;
+    width: 33%;
     height: 50%;
-    background-color: red;
     
         position: absolute;
         top:0;
