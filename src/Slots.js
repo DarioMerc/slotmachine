@@ -1,7 +1,12 @@
 import React,{useRef, useState} from 'react';
 import styled, {ThemeProvider } from 'styled-components';
 
-import { Panel,Button } from 'react95';
+import { Panel,Button,Tabs,
+    Tab,
+    TabBody,
+    Window,
+    WindowHeader,
+    WindowContent, } from 'react95';
 import original from "react95/dist/themes/original";
 
 const fruits = ["🍒", "🍉", "🍊", "🍓", "🍇", "🥝"]
@@ -77,44 +82,52 @@ export const Slots = () => {
         <ThemeProvider theme={original}>
         <Container>
             <SlotContainer>
-                <h1>Slots</h1>
-                <p>{result}</p>
-                <FruitContainers>
-                    <Slot variant='well'>
-                        <SlotSection>
-                            <FruitContainer ref={slotRef[0]}>
-                            {fruits.map((fruit,i)=>(
-                                <div key={i}>
-                                <span>{fruit}</span>
-                                </div>
-                            ))}
-                            </FruitContainer>
-                        </SlotSection>
-                    </Slot>
-                    <Slot variant='well'>
-                        <SlotSection>
-                                <FruitContainer ref={slotRef[1]}>
-                                {fruits.map((fruit,i)=>(
-                                    <div key={i}>
-                                    <span>{fruit}</span>
-                                    </div>
-                                ))}
-                                </FruitContainer>
-                        </SlotSection>
-                    </Slot>
-                    <Slot variant='well'>
-                        <SlotSection>
-                            <FruitContainer ref={slotRef[2]}>
-                            {fruits.map((fruit,i)=>(
-                                <div key={i}>
-                                <span>{fruit}</span>
-                                </div>
-                            ))}
-                            </FruitContainer>
-                        </SlotSection>
-                    </Slot>
-                </FruitContainers>
-                <Button disabled={rolling} onClick={() => roll()}>Roll</Button>
+                <WindowHeader>Slots</WindowHeader>
+                <WindowContent>
+                    <Tabs>
+                        <Tab>Play</Tab>
+                        <Tab>Settings</Tab>
+                    </Tabs>
+                    <TabBody>
+                        <p>{result}</p>
+                        <FruitContainers>
+                            <Slot variant='well'>
+                                <SlotSection>
+                                    <FruitContainer ref={slotRef[0]}>
+                                    {fruits.map((fruit,i)=>(
+                                        <div key={i}>
+                                        <span>{fruit}</span>
+                                        </div>
+                                    ))}
+                                    </FruitContainer>
+                                </SlotSection>
+                            </Slot>
+                            <Slot variant='well'>
+                                <SlotSection>
+                                        <FruitContainer ref={slotRef[1]}>
+                                        {fruits.map((fruit,i)=>(
+                                            <div key={i}>
+                                            <span>{fruit}</span>
+                                            </div>
+                                        ))}
+                                        </FruitContainer>
+                                </SlotSection>
+                            </Slot>
+                            <Slot variant='well'>
+                                <SlotSection>
+                                    <FruitContainer ref={slotRef[2]}>
+                                    {fruits.map((fruit,i)=>(
+                                        <div key={i}>
+                                        <span>{fruit}</span>
+                                        </div>
+                                    ))}
+                                    </FruitContainer>
+                                </SlotSection>
+                            </Slot>
+                        </FruitContainers>
+                        <Button disabled={rolling} onClick={() => roll()}>Roll</Button>
+                    </TabBody>
+                </WindowContent>
             </SlotContainer>
         </Container>
     </ThemeProvider>
@@ -133,13 +146,13 @@ const Container = styled.div`
     
     margin: auto;
 `
-const SlotContainer = styled(Panel)`
+const SlotContainer = styled(Window)`
     min-width: 400px;
     min-height: 400px;
-    text-align: center;
+    /* text-align: center; */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
 `
 const FruitContainers = styled.div`
   display: flex;
