@@ -2,11 +2,9 @@ import React,{useRef, useState} from 'react';
 import styled, {ThemeProvider } from 'styled-components';
 import { Panel,Button} from 'react95';
 
-
-const fruits = ["🍒", "🍉", "🍊", "🍓", "🍇", "🥝"]
 let ongoingGame = false;
-
-export const Game = () => {
+export const Game = ({currentIcons}) => {
+    
     let slotRef = [useRef(null), useRef(null), useRef(null)];
     const [rolling,setRolling] = useState(false)
     const [result,setResult] = useState("-")
@@ -43,11 +41,11 @@ export const Game = () => {
         }
         let options = ref.children;
         let randomOption = Math.floor(
-          Math.random() * fruits.length
+          Math.random() * currentIcons.length
         );
         let choosenOption = options[randomOption];
         setTop(-choosenOption.offsetTop + 2);
-        return fruits[randomOption];
+        return currentIcons[randomOption];
     };
 
     //CHECK OUTCOME
@@ -78,7 +76,7 @@ export const Game = () => {
                             <Slot variant='well'>
                                 <SlotSection>
                                     <FruitContainer ref={slotRef[0]}>
-                                    {fruits.map((fruit,i)=>(
+                                    {currentIcons.map((fruit,i)=>(
                                         <div key={i}>
                                         <span>{fruit}</span>
                                         </div>
@@ -89,7 +87,7 @@ export const Game = () => {
                             <Slot variant='well'>
                                 <SlotSection>
                                         <FruitContainer ref={slotRef[1]}>
-                                        {fruits.map((fruit,i)=>(
+                                        {currentIcons.map((fruit,i)=>(
                                             <div key={i}>
                                                 <span>{fruit}</span>
                                             </div>
@@ -100,7 +98,7 @@ export const Game = () => {
                             <Slot variant='well'>
                                 <SlotSection>
                                     <FruitContainer ref={slotRef[2]}>
-                                    {fruits.map((fruit,i)=>(
+                                    {currentIcons.map((fruit,i)=>(
                                         <div key={i}>
                                         <span>{fruit}</span>
                                         </div>

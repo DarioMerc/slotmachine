@@ -11,16 +11,26 @@ import original from "react95/dist/themes/original";
 import { Settings } from './Settings';
 import { Game } from './Game';
 
+
+const icons = {
+    "fruits":["🍒", "🍉", "🍊", "🍓", "🍇", "🥝"],
+    "fruits2":["🍌", "🍋", "🍍", "🥭", "🍈", "🍐"],
+    "vegetables":["🥔","🥕","🌽","🥦","🍆","🍅"],
+    "grains":["🍞","🥐","🥖","🥨","🥯","🧇"],
+    "food":["🍔","🍕","🌭","🌮","🥪","🌯"],
+}
+
 export const Slots = () => {
     const [activeTab,setActiveTab] = useState('game');
+    const [currentIcons,setCurrentIcons] = useState(icons.fruits)
 
     function renderSwitch(option){
         switch (option) {
             case "game":
-                return <Game/>
+                return <Game icons={icons} currentIcons={currentIcons}/>
                 break;
             case "settings":
-                return <Settings/>
+                return <Settings setCurrentIcons={setCurrentIcons}/>
                 break
             default:
                 break;
