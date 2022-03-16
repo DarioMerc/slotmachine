@@ -1,123 +1,125 @@
-import React,{useRef, useState} from 'react';
-import styled, {ThemeProvider } from 'styled-components';
-import { Panel,Button} from 'react95';
+import React, { useRef, useState } from "react";
+import styled, { ThemeProvider } from "styled-components";
+import { Panel, Button } from "react95";
 
 let ongoingGame = false;
-export const Game = ({currentIcons}) => {
-    
+export const Game = ({ currentIcons }) => {
     let slotRef = [useRef(null), useRef(null), useRef(null)];
-    const [rolling,setRolling] = useState(false)
-    const [result,setResult] = useState("-")
+    const [rolling, setRolling] = useState(false);
+    const [result, setResult] = useState("-");
 
-    function roll(){
-        setResult("-")
+    function roll() {
+        setResult("-");
         ongoingGame = true;
-        setRolling(true)
+        setRolling(true);
 
-        let slot1,slot2,slot3 = null;
+        let slot1,
+            slot2,
+            slot3 = null;
         slotRef.forEach((slot, i) => {
             const selected = triggerSlotRotation(slot.current);
-            if(i+1 === 1){
+            if (i + 1 === 1) {
                 slot1 = selected;
-            }
-            else if(i+1 === 2){
+            } else if (i + 1 === 2) {
                 slot2 = selected;
-            }
-            else{
+            } else {
                 slot3 = selected;
-            } 
+            }
         });
 
         setTimeout(() => {
-            setRolling(false)
-            checkOutcome([slot1,slot2,slot3])
-        }, 700)
-        
+            setRolling(false);
+            checkOutcome([slot1, slot2, slot3]);
+        }, 700);
     }
 
-    const triggerSlotRotation = ref => {
+    const triggerSlotRotation = (ref) => {
         function setTop(top) {
             ref.style.top = `${top}px`;
         }
         let options = ref.children;
-        let randomOption = Math.floor(
-          Math.random() * currentIcons.length
-        );
+        let randomOption = Math.floor(Math.random() * currentIcons.length);
         let choosenOption = options[randomOption];
         setTop(-choosenOption.offsetTop + 2);
         return currentIcons[randomOption];
     };
 
     //CHECK OUTCOME
-    function checkOutcome(slotsArray){
-        console.log("CHECKING OUTCOME")
-            // let slotsArray = Object.keys(slots).map((key) => [slots[key]]);
-            let counts = {};
-            for (const fruit of slotsArray) {
-                counts[fruit] = counts[fruit] ? counts[fruit] + 1 : 1;
-            }
-            slotsArray.forEach(fruit => {
-                if(ongoingGame){
-                    console.log(counts[fruit]);
-                    if(counts[fruit] === 2){
-                        setResult("WIN DOUBLE!")
-                        ongoingGame = false;
-                    }else if(counts[fruit] === 3){
-                        setResult("WIN TRIPLE")
-                        ongoingGame = false;
-                    }
+    function checkOutcome(slotsArray) {
+        console.log("CHECKING OUTCOME");
+        // let slotsArray = Object.keys(slots).map((key) => [slots[key]]);
+        let counts = {};
+        for (const fruit of slotsArray) {
+            counts[fruit] = counts[fruit] ? counts[fruit] + 1 : 1;
+        }
+        slotsArray.forEach((fruit) => {
+            if (ongoingGame) {
+                console.log(counts[fruit]);
+                if (counts[fruit] === 2) {
+                    setResult("WIN DOUBLE!");
+                    ongoingGame = false;
+                } else if (counts[fruit] === 3) {
+                    setResult("WIN TRIPLE");
+                    ongoingGame = false;
                 }
-            });
+            }
+        });
     }
     return (
-      <>
-    <p>{result}</p>
-                        <FruitContainers>
-                            <Slot variant='well'>
-                                <SlotSection>
-                                    <FruitContainer ref={slotRef[0]}>
-                                    {currentIcons.map((fruit,i)=>(
-                                        <div key={i}>
-                                        <span>{fruit}</span>
-                                        </div>
-                                    ))}
-                                    </FruitContainer>
-                                </SlotSection>
-                            </Slot>
-                            <Slot variant='well'>
-                                <SlotSection>
-                                        <FruitContainer ref={slotRef[1]}>
-                                        {currentIcons.map((fruit,i)=>(
-                                            <div key={i}>
-                                                <span>{fruit}</span>
-                                            </div>
-                                        ))}
-                                        </FruitContainer>
-                                </SlotSection>
-                            </Slot>
-                            <Slot variant='well'>
-                                <SlotSection>
-                                    <FruitContainer ref={slotRef[2]}>
-                                    {currentIcons.map((fruit,i)=>(
-                                        <div key={i}>
-                                        <span>{fruit}</span>
-                                        </div>
-                                    ))}
-                                    </FruitContainer>
-                                </SlotSection>
-                            </Slot>
-                        </FruitContainers>
-                        <Button disabled={rolling} onClick={() => roll()}>Roll</Button>
-                                    </>
-    )
-}
-
+        <SlotContainer>
+            <p>{result}</p>
+            <FruitContainers>
+                <Slot variant="well">
+                    <SlotSection>
+                        <FruitContainer ref={slotRef[0]}>
+                            {currentIcons.map((fruit, i) => (
+                                <div key={i}>
+                                    <span>{fruit}</span>
+                                </div>
+                            ))}
+                        </FruitContainer>
+                    </SlotSection>
+                </Slot>
+                <Slot variant="well">
+                    <SlotSection>
+                        <FruitContainer ref={slotRef[1]}>
+                            {currentIcons.map((fruit, i) => (
+                                <div key={i}>
+                                    <span>{fruit}</span>
+                                </div>
+                            ))}
+                        </FruitContainer>
+                    </SlotSection>
+                </Slot>
+                <Slot variant="well">
+                    <SlotSection>
+                        <FruitContainer ref={slotRef[2]}>
+                            {currentIcons.map((fruit, i) => (
+                                <div key={i}>
+                                    <span>{fruit}</span>
+                                </div>
+                            ))}
+                        </FruitContainer>
+                    </SlotSection>
+                </Slot>
+            </FruitContainers>
+            <Button disabled={rolling} onClick={() => roll()}>
+                Roll
+            </Button>
+        </SlotContainer>
+    );
+};
+const SlotContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
 const FruitContainers = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 20px;
-`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+`;
 const SlotSection = styled.section`
     position: relative;
     width: 100px;
@@ -131,7 +133,7 @@ const SlotSection = styled.section`
     left: 2px;
     font-size: 40px;
     line-height: 90px;
-`
+`;
 const FruitContainer = styled.div`
     position: relative;
     top: 2px;
@@ -139,9 +141,9 @@ const FruitContainer = styled.div`
     width: 100%;
     transition: top ease-in-out 0.7s;
     text-align: center;
-`
+`;
 const Slot = styled(Panel)`
     min-height: 100px;
     min-width: 100px;
     margin: 0px 5px;
-`
+`;
