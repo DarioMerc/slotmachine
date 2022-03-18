@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import {
     Tabs,
@@ -21,10 +21,16 @@ const icons = {
     "food": ["🍔", "🍕", "🌭", "🌮", "🥪", "🌯"],
 };
 
+var radio = new Audio("https://radio.plaza.one/mp3");
+
 export const Slots = () => {
     const [theme, setTheme] = useState(original);
     const [activeTab, setActiveTab] = useState("game");
     const [currentIcons, setCurrentIcons] = useState(icons.fruits);
+
+    useEffect(() => {
+        radio.play();
+    }, []);
 
     function renderSwitch(option) {
         switch (option) {
@@ -36,6 +42,7 @@ export const Slots = () => {
                     <Settings
                         setCurrentIcons={setCurrentIcons}
                         setTheme={setTheme}
+                        radio={radio}
                     />
                 );
                 break;
@@ -43,6 +50,7 @@ export const Slots = () => {
                 break;
         }
     }
+
     return (
         <ThemeProvider theme={theme}>
             <Container>

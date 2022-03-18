@@ -1,5 +1,5 @@
 import React from "react";
-import { Select } from "react95";
+import { Select, Button, Slider, Radio } from "react95";
 
 import original from "react95/dist/themes/original";
 import brick from "react95/dist/themes/brick";
@@ -25,7 +25,7 @@ const themes = [
     { label: "plum", value: plum },
 ];
 
-export const Settings = ({ setCurrentIcons, setTheme }) => {
+export const Settings = ({ setCurrentIcons, setTheme, radio }) => {
     return (
         <>
             <span
@@ -65,6 +65,11 @@ export const Settings = ({ setCurrentIcons, setTheme }) => {
                     onBlur={(e) => console.log("blur", e)}
                     onFocus={(e) => console.log("focus", e)}
                 />
+            </span>
+            <p>Music</p>
+            <span>
+                <Button>Mute</Button>
+                <Slider></Slider>
             </span>
         </>
     );
