@@ -25,7 +25,7 @@ const themes = [
     { label: "plum", value: plum },
 ];
 
-export const Settings = ({ setCurrentIcons, setTheme, radio }) => {
+export const Settings = ({ setCurrentIcons, setTheme }) => {
     return (
         <>
             <span
@@ -65,11 +65,6 @@ export const Settings = ({ setCurrentIcons, setTheme, radio }) => {
                     onBlur={(e) => console.log("blur", e)}
                     onFocus={(e) => console.log("focus", e)}
                 />
-            </span>
-            <p>Music</p>
-            <span>
-                <Button>Mute</Button>
-                <Slider></Slider>
             </span>
         </>
     );
